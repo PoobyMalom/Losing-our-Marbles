@@ -1,4 +1,4 @@
-// color sorting with euclidean distance
+// color sorting with euclidean distance for sprint 1 mechanical system
 #include <Servo.h>
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"

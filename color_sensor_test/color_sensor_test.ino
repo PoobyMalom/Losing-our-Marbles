@@ -7,11 +7,12 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
 
-  if (tcs.begin()){
+  if (tcs.begin()) {
     Serial.println("found sensor");
   } else {
     Serial.println("no sensor found");
-    while (1); // end program
+    while (1)
+      ;  // end program
   }
 }
 
@@ -22,13 +23,13 @@ void loop() {
 
   //check for significant color
   int threshold = 50;
-  if (c > threshold){
+  if (c > threshold) {
     //normalize values
     float sum = c;
-    float red = r/ sum;
-    float green = g/ sum;
-    float blue = b/ sum;
-
+    float red = r / sum;
+    float green = g / sum;
+    float blue = b / sum;
+    
     Serial.print("R: "); Serial.print(r); Serial.print(" ");
     Serial.print("G: "); Serial.print(g); Serial.print(" ");
     Serial.print("B: "); Serial.print(b); Serial.print(" ");
@@ -42,7 +43,7 @@ void loop() {
     Serial.print("Lux: "); Serial.println(lux, DEC);
 
     // direct against led
-/*
+
     if (r+g+b < 100){ //black
       Serial.println("black");
     } else if (r+g+b > 10000){ //white
@@ -58,7 +59,8 @@ void loop() {
     } else {
       Serial.println("idk color");
     }
-    */
+    
+
 
     if (c > 850){
       if (g+b > 850){ //white
@@ -79,13 +81,14 @@ void loop() {
         Serial.println("dunno");
       }
     }
+
+
+    
   }
 
   else {
     Serial.println("no significant color");
   }
   
-
-
 
 }

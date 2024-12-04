@@ -2,6 +2,7 @@
 #include <Servo.h>
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"
+#include <ArduinoJson.h>
 
 
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
@@ -18,6 +19,10 @@ int TOP_SERVO_PIN = 3;
 int RIGHT_SERVO_PIN = 5;
 int LEFT_SERVO_PIN = 6;
 int COLUMNS [9][2]= {{35, 35}, {77, 35}, {77, 70}, {77, 100}, {77, 135}, {123, 30}, {123, 63}, {123, 95}, {123, 130}}; //first chute is trash, rest go left to right
+const int ROWS = 8;
+const int COLS = 8;
+String recievedData;
+int colorMatrix[ROWS][COLS];
 
 
 float colorVectors[7][4] = {
@@ -46,6 +51,10 @@ void setup() {
   leftservo.attach(LEFT_SERVO_PIN);
   rightservo.attach(RIGHT_SERVO_PIN);
 
+  while (!Serial) {
+    ;
+  }
+
   if (tcs.begin()) {
     Serial.println("found sensor");
   } else {
@@ -53,6 +62,8 @@ void setup() {
     while (1)
       ;  // end program
   }
+
+  Serial.println("Ready o receive data");
 }
 
 float euclideanDistance(float *marbleVec, float *refVec) {
@@ -74,6 +85,40 @@ int minValue(float *myArray) {
 }
 
 void loop() {
+
+  // Waiting for picture
+  if (Serial.available() > 0) {
+    // Read the incoming JSON data
+    StaticJsonDocument<512> doc;
+    receivedData = Serial.readStringUntil('\n'); // Read until newline (end of JSON string)
+    
+    // Print the received data for debugging
+    Serial.print("Received data: ");
+    Serial.println(receivedData);
+
+    DeserializationError error = deserializeJson(doc, receivedData);
+
+    JsonArray rows = doc.as<JsonArray>();
+    for (int i = 0; i < ROWS; i++) {
+      JsonArray cols = rows[i];
+      for (int j = 0; j < COLS; j++) {
+        colorMatrix[i][j] = cols[j];
+      }
+    }
+
+    Serial.println("Received and parsed the matrix:");
+    for (int i = 0; i < ROWS; i++) {
+      for (int j = 0; j < COLS; j++) {
+        Serial.print(colorMatrix[i][j]);
+        Serial.print(" ");
+      }
+      Serial.println();
+    }
+    
+    // Send a message back indicating data has been received and processed
+    Serial.println("Done receiving and processing data");
+  }
+
   delay(1000);
   unsigned long currentMillis = millis();
   uint16_t r, g, b, c;

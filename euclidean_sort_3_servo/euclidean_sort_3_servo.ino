@@ -24,6 +24,10 @@ const int COLS = 8;
 String recievedData;
 int colorMatrix[ROWS][COLS];
 
+//matrix of marble colors to create the image is given. 2d array. each column of marbles is a column vector
+char *image [8][8] = {{"red", "red", "red", "red", "red", "red", "red", "red"}, {"yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow"}, {"green", "green", "green", "green", "green", "green", "green", "green"}, {"blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"}, {"white","white", "white", "white", "white", "white", "white", "white"}, {"black", "black", "black", "black", "black", "black", "black", "black"}, {"red", "yellow", "black", "red", "yellow", "black", "red", "yellow"}, {"green", "blue", "white", "green", "blue", "white", "green", "blue"}};
+int fillCount[] = {0, 0, 0, 0, 0, 0, 0, 0}; // index of image column to start at for each column
+
 
 float colorVectors[7][4] = {
   //rgbc values for the different marble colors
@@ -37,7 +41,6 @@ float colorVectors[7][4] = {
 };
 
 char *colorLabels[] = { "white", "black", "red", "green", "blue", "yellow", "nothing" };
-unsigned long previousMillis = 0;
 
 
 void setup() {
@@ -84,6 +87,20 @@ int minValue(float *myArray) {
   return minValIndex;
 }
 
+void servoColumn(int column){
+  // moves the servos so that the marble falls into the desired column
+     if (column >= 5){
+      topservo.write(COLUMNS[column][0]);
+      rightservo.write(COLUMNS[column][1]);
+    } else if (1 <= column <= 4){
+      topservo.write(COLUMNS[column][0]);
+      leftservo.write(COLUMNS[column][1]);
+    } else {
+      topservo.write(COLUMNS[0][0]);
+    }
+}
+
+
 void loop() {
 
   // Waiting for picture
@@ -120,7 +137,6 @@ void loop() {
   }
 
   delay(1000);
-  unsigned long currentMillis = millis();
   uint16_t r, g, b, c;
   tcs.getRawData(&r, &g, &b, &c);
   float sum = float(c) * cMultiplier;
@@ -153,6 +169,7 @@ void loop() {
 
   // find marble color from closest distance
   marbleColor = colorLabels[index_minimum_value];
+  /*
   Serial.print(marbleColor);
   Serial.print(": ");
   Serial.print(colorVectors[index_minimum_value][0]);
@@ -162,24 +179,35 @@ void loop() {
   Serial.print(colorVectors[index_minimum_value][2]);
   Serial.print(", ");
   Serial.println(colorVectors[index_minimum_value][3]);
+  */
 
-/*for (int i = 0; i <= 7; i++){
-      // change servo based on marbleColor
-      if (marbleColor == colorLabels[i]) {
-        Serial.print("column: "); Serial.println(i);
-        Serial.print("top servo: "); Serial.print(COLUMNS[i][0]); Serial.print("bottom servo: "); Serial.println(COLUMNS[i][1]);
-        topservo.write(COLUMNS[i][0]);
-        if (0 < i && i <= 3){
-          leftservo.write(COLUMNS[i][1]);
-        } else{
-          rightservo.write(COLUMNS[i][1]); //col 4 puts in col 2
-        }
-        delay(10);
-      }*/
-  
-//&& currentMillis - previousMillis >= 2000
+
+
+// putting marbles in the right spot
   if (marbleColor != "nothing"){
-    if (marbleColor == "red"){
+    // access first index of each column vector. this is the next marble to add to each column
+    bool match = false;
+    for (int i = 0; i <= 7; i++){
+      if (marbleColor == image[i][fillCount[i]]){
+        servoColumn(i+1);
+        fillCount[i]++;
+        match = true;
+    }
+    if (match == false){
+      servoColumn(0);
+    }
+    
+    digitalWrite(DROPPER_SOLENOID_PIN, HIGH);  // RELAY ON (extend)
+    delay(200);
+    digitalWrite(DROPPER_SOLENOID_PIN, LOW);  // RELAY OFF (contract)
+    delay(200);
+  }   
+}
+
+
+// marble sorting code (we know this works)
+/*
+if (marbleColor == "red"){
       topservo.write(COLUMNS[7][0]);
       rightservo.write(COLUMNS[7][1]);
     } else if (marbleColor == "green"){
@@ -201,20 +229,6 @@ void loop() {
     else{
       topservo.write(COLUMNS[0][0]);
     }
-    
-    previousMillis = currentMillis;
-    digitalWrite(DROPPER_SOLENOID_PIN, HIGH);  // RELAY ON (extend)
-    delay(200);
-    digitalWrite(DROPPER_SOLENOID_PIN, LOW);  // RELAY OFF (contract)
-    delay(200);
-  }                               // wait for marble to drop
-}
+    */
 
-
-// pseudocode for building matrix with marbles
-//matrix of marble colors to create the image is given. 2d array. each column of marbles is a column vector
-// access first index of each column vector. this is the next marble to add to each column
-// loop through the first index of each column vector to see if it matches with the marble color.
-// if matches with marble color, put marble in that column (move servo to the angle) and remove first index from that column
-// if doesn't match any columns, put in trash
 

@@ -304,3 +304,94 @@ body {
     border: 5px solid #ccc; /* Optional: border for the image */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
 }
+
+/* Centered heading styles */
+.centered-heading {
+    text-align: center; /* Centers the text */
+    margin: 20px 0; /* Adds some vertical spacing */
+}
+
+.centered-heading h1 {
+    font-size: 2.5rem; /* Adjust heading size */
+    font-weight: bold;
+    color: #333; /* Dark gray for the text */
+    margin: 0; /* Remove default margin */
+}
+
+/* Blended text section without box */
+.blended-text-section {
+    text-align: center; /* Center the text horizontally */
+    width: 100%; /* Full width */
+    margin: 20px 0; /* Add vertical spacing */
+    color: rgba(0, 0, 0, 0.7); /* Slightly transparent text to blend */
+    font-size: 1.5rem; /* Adjust font size */
+    line-height: 1.8; /* Improve readability */
+    font-weight: 400; /* Normal font weight */
+}
+
+/* Image and Text Section */
+.image-text-section-team {
+    display: flex; /* Align items in a row */
+    align-items: center; /* Vertically center content */
+    gap: 30px; /* Space between image and text */
+    padding: 20px; /* Spacing around the section */
+    max-width: 1600px; /* Limit section width */
+    margin: 40px auto; /* Center section horizontally */
+}
+
+.team-pic img {
+    width: 100%; /* Make image responsive */
+    max-width: 1000px; /* Limit image width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
+}
+
+.text-container {
+    flex: 1.5; /* Allow text to take remaining space */
+}
+
+.section-heading {
+    font-size: 2rem; /* Larger heading size */
+    color: #333; /* Dark gray color */
+    margin-bottom: 10px; /* Spacing below heading */
+}
+
+.section-text {
+    font-size: 1.1rem; /* Text size */
+    line-height: 1.6; /* Improve readability */
+    color: #555; /* Slightly lighter gray */
+}
+
+/* Two-image rows */
+.image-blurb-section {
+    display: flex;
+    justify-content: center; /* Center the images horizontally */
+    gap: 120px; /* Increase space between the images */
+    margin: 60px 0; /* Add more vertical spacing between rows */
+}
+
+.image-blurb {
+    text-align: center; /* Center the image and text */
+}
+
+.image-blurb img,
+.image-blurb-center img {
+    width: 250px; /* Fixed width */
+    height: 250px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+
+.blurb-text {
+    margin-top: 10px; /* Space between the image and text */
+    font-size: 1rem; /* Standard font size */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Single centered image */
+.image-blurb-center {
+    text-align: center;
+    margin: 80px 0; /* Increase vertical spacing */
+}

@@ -14,31 +14,19 @@
             <div id="homepage-box-content">
                 <div id="homepage-header">
                     <div id="header-logo">
-                        <img src="./logo.png" alt="logo" id="logo">
+                        <img src="./imgs/logo.png" alt="logo" id="logo">
                     </div>
                     <div id="spacer"></div>
                     <div id="header-nav">
-                        <div class="nav-item-dropdown">
-                            <a href="system.html" class="dropdown-link">System</a>
-                            <div class="dropdown-content">
-                                <a href="mechanical.html">Mechanical</a>
-                                <a href="electrical.html">Electrical</a>
-                                <a href="firmware.html">Firmware</a>
-                                <a href="software.html">Software</a>
-                                <a href="design.html">Design</a>
-                            </div>
-                        </div>                        
-                        <div class="nav-item-dropdown">Process
-                            <div class="dropdown-content">
-                                <a href="sprint1.html">Sprint 1</a>
-                                <a href="sprint2.html">Sprint 2</a>
-                                <a href="sprint3.html">Sprint 3</a>
-                                <a href="budget.html">Budget</a>
-                            </div>
-                        </div>
-                        <div class="nav-item">
-                            <a href="team.html" class="nav-link">Team</a>
-                        </div>
+                        <a href="system.html" class="nav-link">System</a>
+                        <a href="mechanical.html" class="nav-link">Mechanical</a>
+                        <a href="electrical.html" class="nav-link">Electrical</a>
+                        <a href="software.html" class="nav-link">Software</a>
+                        <a href="sprint1.html" class="nav-link">Sprint 1</a>
+                        <a href="sprint2.html" class="nav-link">Sprint 2</a>
+                        <a href="sprint3.html" class="nav-link">Sprint 3</a>
+                        <a href="budget.html" class="nav-link">Budget</a>
+                        <a href="team.html" class="nav-link">Team</a>
                     </div>
                 </div>
 
@@ -49,7 +37,7 @@
                             In sprint one, we wanted to see if we could sense and sort the marble into two columns in an unintegrated system.
                         </p>
                     </div>
-                    <img src="./pic.png" alt="Descriptive Image" class="image-text-image">
+                    <img src="./imgs/Sprint 1 Concept Sketch.jpg" alt="Descriptive Image" class="image-text-image">
                 </div>   
 
                 <div class="centered-text-section">
@@ -59,7 +47,7 @@
                 </div>
 
                 <div class="image-text-section">
-                    <img src="./pic.png" alt="Descriptive Image" class="image-text-image">
+                    <img src="./imgs/sprint1-mech.jpg" alt="Descriptive Image" class="image-text-image">
                     <div class="image-text-content">
                         <h2>MECHINICAL</h2>
                         <p>
@@ -80,47 +68,49 @@
                     <div class="image-text-content">
                         <h2>ELECTRICAL</h2>
                         <p>
-                            This is another section with the same layout, but the image is now on the right, and the text is on the left. 
-                            You can use this for variety or emphasize the text content differently.
+                            The electrical subteam’s sprint one goal was to prototype a color sensor and solenoid mechanism. we also wanted to draw up a rudimentary wiring diagram for what we thought the system would need
                         </p>
                     </div>
-                    <img src="./pic.png" alt="Descriptive Image" class="image-text-image">
+                    <img src="./imgs/sprint1.jpg" alt="Descriptive Image" class="image-text-image">
                 </div>
 
                 <div class="centered-text-section">
                     <p>
-                        This is a section with centered text, designed to grab attention or highlight important content.
-                        You can use it for quotes, calls to action, or any other key message you'd like to emphasize.
+                        All electrical goals were achieved during this sprint. 
+                        The color sensor and solenoid mechanism were prototyped and tested. The color sensor was able to detect the color of the marbles and send a signal to the solenoid to bump the marble into the sorting mechanism. The color sensor was mounted to the pathway and the solenoid was mounted to the pathway as well. The solenoid was able to bump the marble into the sorting mechanism with accuracy. The color sensor was able to detect the color of the marbles with accuracy. 
+                        A rudimentary wiring diagram was also drawn up. The wiring diagram was a basic layout of what we thought the system would need to function. The diagram included the color sensor, solenoid, and servo. The diagram was used to help us understand what we needed to do to get the system to work.
                     </p>
                 </div>
 
                 <div class="image-text-section">
-                    <img src="./pic.png" alt="Descriptive Image" class="image-text-image">
                     <div class="image-text-content">
                         <h2>SOFTWARE</h2>
                         <p>
-                            This is the content area where you can describe the image or provide related information. 
-                            The text and the image are aligned side-by-side for a visually balanced layout.
+                            The software goal was to ensure each electrical component for color sensing and sorting could individually function as we intended. We broke this down into three steps: actuate the solenoid to push a marble off a ledge on command, determine the color of a marble using a color sensor, and move a servo motor to feed the marble into a different column based on the determined color of the marble.
                         </p>
                     </div>
                 </div>
 
                 <div class="centered-text-section">
                     <p>
-                        This is a section with centered text, designed to grab attention or highlight important content.
-                        You can use it for quotes, calls to action, or any other key message you'd like to emphasize.
+                        We mostly reached this software goal. We wrote two programs in the Arduino IDE: one to determine marble color using the color sensor, and another to actuate the servo motor and solenoid as if the color of the marble was known. The actuating program confirmed that the solenoid and servo motor would function as we intended, but the color sensing program made errors in determining the marble’s color – more than we believed would work for our project. The program to determine marble color was calibrated by analyzing the sensor readings of each marble color, and based on this, manually making rules to categorize future sensor readings into a known marble color. By testing the calibration, we found that the marble’s color was often incorrectly categorized. The marble color would need to be nearly perfectly categorized for the marble machine to make art, and because this did not occur, we did not fully reach our goal for color sensing. 
                     </p>
                 </div>
                 <div id="homepage-footer">
                     <div class="footer-content">
                         <nav class="footer-nav">
-                            <a href="#homepage-box" class="footer-link">Home</a>
-                            <a href="#centered-text-box" class="footer-link">About</a>
-                            <a href="#image-text-section" class="footer-link">Gallery</a>
-                            <a href="#centered-text-section" class="footer-link">Contact</a>
+                            <a href="system.html" class="footer-link">System</a>
+                            <a href="mechanical.html" class="footer-link">Mechanical</a>
+                            <a href="electrical.html" class="footer-link">Electrical</a>
+                            <a href="software.html" class="footer-link">Software</a>
+                            <a href="sprint1.html" class="footer-link">Sprint 1</a>
+                            <a href="sprint2.html" class="footer-link">Sprint 2</a>
+                            <a href="sprint3.html" class="footer-link">Sprint 3</a>
+                            <a href="budget.html" class="footer-link">Budget</a>
+                            <a href="team.html" class="footer-link">Team</a>
                         </nav>
                         <p class="footer-text">
-                            &copy; 2024 My Website | All rights reserved.
+                            &copy; 2024 Losing Our Marbles | All rights reserved.
                         </p>
                     </div>
                 </div>

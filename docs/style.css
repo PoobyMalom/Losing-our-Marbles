@@ -17,99 +17,6 @@ body {
     padding: 20px;
 }
 
-/* Header styles */
-#homepage-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #282828;
-    color: #fff;
-    padding: 20px;
-}
-
-#header-logo img {
-    height: 50px; /* Adjust logo size */
-}
-
-#spacer {
-    flex-grow: 1;
-}
-
-#header-nav {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-item, .nav-item-dropdown {
-    cursor: pointer;
-    padding: 10px;
-    position: relative;
-}
-
-.nav-item {
-    background-color: #444;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.nav-item:hover {
-    background-color: #666;
-}
-
-.nav-item-dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #444;
-    border-radius: 5px;
-    min-width: 160px;
-    z-index: 1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #666;
-}
-
-/* Footer styles */
-#homepage-footer {
-    padding: 20px;
-    background-color: #282828;
-    color: #fff;
-    text-align: center;
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    #homepage-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #header-nav {
-        flex-direction: column;
-    }
-
-    .nav-item, .nav-item-dropdown {
-        width: 100%;
-        text-align: left;
-        padding: 12px;
-    }
-
-    #spacer {
-        display: none;
-    }
-}
 
 /* Centered text box styles */
 .centered-text-box {
@@ -318,6 +225,13 @@ body {
     margin: 0; /* Remove default margin */
 }
 
+.centered-heading h2 {
+    font-size: 2.0rem; /* Adjust heading size */
+    font-weight: bold;
+    color: #333; /* Dark gray for the text */
+    margin: 0; /* Remove default margin */
+}
+
 /* Blended text section without box */
 .blended-text-section {
     text-align: center; /* Center the text horizontally */
@@ -390,11 +304,21 @@ body {
     color: #555; /* Slightly lighter text color */
 }
 
+.blurb-text-center {
+    margin-top: 10px; /* Space between the image and text */
+    font-size: 1rem; /* Standard font size */
+    color: #555; /* Slightly lighter text color */
+    max-width: 40%; /* Constrain the text to 40% of the page width */
+    margin: 0 auto; /* Center the text block horizontally */
+}
+
 /* Single centered image */
 .image-blurb-center {
     text-align: center;
     margin: 80px 0; /* Increase vertical spacing */
 }
+
+
 
 /* System content container */
 .budget-system-content {
@@ -414,4 +338,135 @@ body {
     margin: 0; /* Remove default margin around the images */
     padding: 0; /* Remove padding */
     border: none; /* Ensure no border is displayed */
+}
+
+/* Side-by-side images container */
+.side-by-side-images {
+    display: flex; /* Align items in a row */
+    justify-content: center; /* Center the images horizontally */
+    align-items: flex-start; /* Align captions with the top of the images */
+    gap: 20px; /* Space between the image blocks */
+    padding: 20px 0; /* Add vertical spacing */
+}
+
+/* Individual image with caption */
+.image-with-caption {
+    text-align: center; /* Center-align the image and caption */
+    width: 500px; /* Fixed width for the container */
+    height: 500px; /* Fixed height for the container to make it square */
+    display: flex; /* Use flex to position the content */
+    flex-direction: column; /* Stack the image container and caption */
+    justify-content: flex-start; /* Ensure caption stays below the image */
+}
+
+/* Image container */
+.image-container {
+    width: 100%; /* Full width of the parent container */
+    height: 100%; /* Full height to make it square */
+    display: flex; /* Flexbox for centering the image */
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+    background-color: #f4f4f4; /* Optional: Light background for empty areas */
+    overflow: hidden; /* Crop any part of the image outside the square */
+}
+
+/* Image styling */
+.side-image {
+    max-width: 100%; /* Scale the image to fit within the container */
+    max-height: 100%; /* Scale the image to fit within the container */
+    object-fit: cover; /* Ensure the image fills the space without distortion */
+}
+
+/* Caption styling */
+.image-caption {
+    margin-top: 10px; /* Space between the image and caption */
+    font-size: 1rem; /* Standard font size */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Header styles */
+/* Header styles */
+#homepage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute space evenly */
+    padding: 10px 20px;
+    background-color: #282c34; /* Dark background */
+    color: #fff;
+    width: 100%; /* Ensure it spans the full width */
+    box-sizing: border-box; /* Include padding in the total width */
+}
+
+#header-logo img {
+    height: 50px; /* Adjust logo size */
+}
+
+#spacer {
+    flex-grow: 1; /* Push navigation links to the right */
+}
+
+#header-nav {
+    display: flex;
+    gap: 20px; /* Space between navigation links */
+}
+
+/* Navigation links */
+.nav-link {
+    color: #fff; /* White text */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Add padding for button-like appearance */
+    background-color: #444; /* Button background */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.nav-link:hover {
+    background-color: #666; /* Slightly lighter background on hover */
+}
+
+.nav-link:active {
+    background-color: #555; /* Darker background on click */
+}
+
+.nav-link:visited {
+    color: #fff; /* Keep text color white */
+}
+
+/* Footer styles */
+#homepage-footer {
+    background-color: #282c34; /* Same dark background as the header */
+    color: #fff; /* White text */
+    padding: 20px 0; /* Vertical padding */
+    text-align: center; /* Center-align footer content */
+    width: 100%; /* Ensure it spans the full width */
+    box-sizing: border-box; /* Include padding in the total width */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the content */
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center; /* Center navigation links */
+    gap: 15px; /* Add spacing between the links */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.footer-link {
+    color: #aaa; /* Light gray text for blending into the footer */
+    text-decoration: none; /* Remove underline */
+    font-size: 1rem; /* Standard font size */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer-link:hover {
+    color: #fff; /* Change to white on hover for emphasis */
+}
+
+.footer-text {
+    margin-top: 10px; /* Space between the nav links and footer text */
+    font-size: 0.875rem; /* Slightly smaller text for copyright */
+    color: #aaa; /* Subtle text color */
 }

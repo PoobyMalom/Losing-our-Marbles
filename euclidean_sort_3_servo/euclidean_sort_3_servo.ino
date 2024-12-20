@@ -1,4 +1,5 @@
 // color sorting with euclidean distance for sprint 2 mechanical system (3 servos, 8x8 matrix)
+// Receives image through serial.
 #include <Servo.h>
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"
@@ -11,14 +12,14 @@ float cMultiplier = 0.02;
 Servo topservo;  // create Servo object to control a servo
 Servo rightservo;
 Servo leftservo;
-int pos = 0;    // variable to store the servo position
 
 // initialize variables
+int SCREW_MOTOR_PIN = 11;
 int DROPPER_SOLENOID_PIN = 12;
 int TOP_SERVO_PIN = 3;
 int RIGHT_SERVO_PIN = 5;
 int LEFT_SERVO_PIN = 6;
-int COLUMNS [9][2]= {{35, 35}, {77, 35}, {77, 70}, {77, 100}, {77, 135}, {123, 30}, {123, 63}, {123, 95}, {123, 130}}; //first chute is trash, rest go left to right
+int COLUMNS [9][2]= {{0, 12}, {48, 17}, {48, 47}, {48, 82}, {48, 118}, {103, 58}, {103, 97}, {103, 133}, {103, 168}}; //first chute is trash, rest go left to right
 const int ROWS = 8;
 const int COLS = 8;
 String recievedData;
@@ -48,6 +49,8 @@ void setup() {
 
 
   Serial.begin(9600);
+  pinMode(SCREW_MOTOR_PIN, OUTPUT);     // DC MOTOR PIN
+  digitalWrite(SCREW_MOTOR_PIN, HIGH);  // RELAY OFF (motor off)
   pinMode(DROPPER_SOLENOID_PIN, OUTPUT);     // RELAY PIN
   digitalWrite(DROPPER_SOLENOID_PIN, LOW);  // Normally ON Only For Chanies Relay Module
   topservo.attach(TOP_SERVO_PIN);         // attaches the servo on pin 3 to the Servo object
@@ -158,10 +161,7 @@ void loop() {
   float allDistances[7];
   for (int i = 0; i < 7; i++) {
     allDistances[i] = euclideanDistance(marbleVector, colorVectors[i]);
-    Serial.print(allDistances[i]);
-    Serial.print(", ");
   }
-  Serial.println(" ");
 
 
   // find closest distance (scale down c basis vector because its less important)
@@ -169,17 +169,8 @@ void loop() {
 
   // find marble color from closest distance
   marbleColor = colorLabels[index_minimum_value];
-  /*
-  Serial.print(marbleColor);
-  Serial.print(": ");
-  Serial.print(colorVectors[index_minimum_value][0]);
-  Serial.print(", ");
-  Serial.print(colorVectors[index_minimum_value][1]);
-  Serial.print(", ");
-  Serial.print(colorVectors[index_minimum_value][2]);
-  Serial.print(", ");
-  Serial.println(colorVectors[index_minimum_value][3]);
-  */
+
+  Serial.println(marbleColor);
 
 
 
@@ -188,47 +179,23 @@ void loop() {
     // access first index of each column vector. this is the next marble to add to each column
     bool match = false;
     for (int i = 0; i <= 7; i++){
-      if (marbleColor == image[i][fillCount[i]]){
+      if ((marbleColor == image[i][fillCount[i]]) && (match == false) && fillCount[i] < 8){
         servoColumn(i+1);
         fillCount[i]++;
         match = true;
+        Serial.print("column: "); Serial.println(i);
     }
     if (match == false){
       servoColumn(0);
+      Serial.print("column: "); Serial.println("trash");
     }
     
     digitalWrite(DROPPER_SOLENOID_PIN, HIGH);  // RELAY ON (extend)
     delay(200);
     digitalWrite(DROPPER_SOLENOID_PIN, LOW);  // RELAY OFF (contract)
-    delay(200);
-  }   
+  } else{
+    digitalWrite(SCREW_MOTOR_PIN, LOW);  // RELAY ON (motor on)
+    delay(2000);
+    digitalWrite(SCREW_MOTOR_PIN, HIGH);  // RELAY OFF (motor off)
+  }
 }
-
-
-// marble sorting code (we know this works)
-/*
-if (marbleColor == "red"){
-      topservo.write(COLUMNS[7][0]);
-      rightservo.write(COLUMNS[7][1]);
-    } else if (marbleColor == "green"){
-      topservo.write(COLUMNS[8][0]);
-      rightservo.write(COLUMNS[8][1]);
-    } else if (marbleColor == "blue"){
-      topservo.write(COLUMNS[3][0]);
-      leftservo.write(COLUMNS[3][1]);
-    } else if (marbleColor == "yellow"){
-      topservo.write(COLUMNS[4][0]);
-      leftservo.write(COLUMNS[4][1]);
-    } else if (marbleColor == "black"){
-      topservo.write(COLUMNS[5][0]);
-      rightservo.write(COLUMNS[5][1]);
-    } else if (marbleColor == "white"){
-      topservo.write(COLUMNS[6][0]);
-      rightservo.write(COLUMNS[6][1]);
-    }
-    else{
-      topservo.write(COLUMNS[0][0]);
-    }
-    */
-
-

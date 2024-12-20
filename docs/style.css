@@ -347,6 +347,7 @@ body {
     align-items: flex-start; /* Align captions with the top of the images */
     gap: 20px; /* Space between the image blocks */
     padding: 20px 0; /* Add vertical spacing */
+    
 }
 
 /* Individual image with caption */
@@ -357,6 +358,7 @@ body {
     display: flex; /* Use flex to position the content */
     flex-direction: column; /* Stack the image container and caption */
     justify-content: flex-start; /* Ensure caption stays below the image */
+    border: 3px solid #333;
 }
 
 /* Image container */

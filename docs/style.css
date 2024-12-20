@@ -472,3 +472,44 @@ body {
     font-size: 0.875rem; /* Slightly smaller text for copyright */
     color: #aaa; /* Subtle text color */
 }
+
+/* Embedded Video Section */
+.embedded-video-section {
+    text-align: center;
+    margin: 40px 0; /* Add vertical spacing */
+}
+
+.embedded-video-section h2 {
+    margin-bottom: 20px; /* Space between heading and video */
+    font-size: 1.5rem; /* Adjust heading size */
+    color: #333;
+}
+
+.embedded-video-section iframe {
+    max-width: 100%; /* Make the video responsive */
+    height: auto; /* Adjust height proportionally */
+    border-radius: 8px; /* Optional: Rounded corners for the video */
+}
+
+/* GitHub Link Section */
+.github-link-section {
+    text-align: center;
+    margin: 40px 0; /* Add vertical spacing */
+}
+
+.github-link-section h2 {
+    margin-bottom: 10px; /* Space between heading and link */
+    font-size: 1.5rem; /* Adjust heading size */
+    color: #333;
+}
+
+.github-link {
+    text-decoration: none; /* Remove underline */
+    font-size: 1.2rem; /* Adjust font size */
+    color: #0066cc; /* Blue link */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.github-link:hover {
+    color: #004999; /* Darker blue on hover */
+}
